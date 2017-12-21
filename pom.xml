@@ -117,5 +117,6 @@
 	<modules>
 		<module>zuul</module>
 		<module>microservice</module>
+		<module>auth</module>
 	</modules>
 </project>

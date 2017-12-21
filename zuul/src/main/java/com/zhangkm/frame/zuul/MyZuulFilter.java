@@ -1,5 +1,6 @@
 package com.zhangkm.frame.zuul;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class MyZuulFilter extends ZuulFilter{
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-
+        
         log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
         Object accessToken = request.getParameter("token");
         if(accessToken == null) {
@@ -49,9 +50,13 @@ public class MyZuulFilter extends ZuulFilter{
             return null;
         }
         log.info("ok");
+
         Map<String,Object> map = new HashMap<String,Object>();
-        map.put("mobile", "13366036699");
-        request.setAttribute("loginInfo", map);
+        map.put("mobile", "13366036600");
+        map.put("realName", "何家华");
+        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(map);
+        ctx.addZuulRequestHeader("loginInfo", jsonObject.toString());
+
         return null;
     }
 }
