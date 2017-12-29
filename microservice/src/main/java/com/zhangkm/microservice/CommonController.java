@@ -1,5 +1,6 @@
 package com.zhangkm.microservice;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -23,7 +24,8 @@ public class CommonController {
 
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> getList(HttpServletRequest request,HttpServletResponse resp) {
+    public Map<String,Object> getList(HttpServletRequest request,HttpServletResponse resp,
+            String para) {
         Enumeration<String> headerNames = request.getHeaderNames();
         String loginInfoString = "";
         while (headerNames.hasMoreElements()) {
@@ -35,9 +37,20 @@ public class CommonController {
                 break;
             }
         }
-        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(loginInfoString);
-        logger.info("[jsonObject][{}]",jsonObject.toString());
+        logger.info("[loginInfoString][{}]",loginInfoString);
+        String base64 = "";
+        try {
+            byte[] bytes = new sun.misc.BASE64Decoder().decodeBuffer(loginInfoString.replaceAll("\r|\n", ""));
+             base64 = new String(bytes,"utf-8");
+            logger.info("[base64][{}]",base64);
 
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+                
+        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(base64);
+        logger.info("[jsonObject][{}]",jsonObject.toString());
         
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("mobile", "13366035578");
@@ -54,6 +67,7 @@ public class CommonController {
         ret.put("data", list);
         ret.put("errorCode", 0);
         ret.put("errorString", "正常");
+        ret.put("para", para);
         return ret;
     }
 

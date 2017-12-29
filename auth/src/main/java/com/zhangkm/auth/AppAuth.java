@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-public class App extends WebMvcConfigurerAdapter{
+public class AppAuth extends WebMvcConfigurerAdapter{
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(AppAuth.class, args);
     } 
 
 }

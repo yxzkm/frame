@@ -23,8 +23,6 @@
 
 	<dependencies>
 
-		<!-- ******************************************************** 以下是springboot核心支持 
-			************************************************************ -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -37,18 +35,17 @@
 		</dependency>
 
 		<!-- springboot应用健康监控插件 -->
-		<dependency>
+		<!-- dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
+ 		-->
+ 		
 		<!-- springboot应用开发环境自动重启应用（文件更新感知）插件 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-
-
 
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 		<dependency>
@@ -118,5 +115,6 @@
 		<module>zuul</module>
 		<module>microservice</module>
 		<module>auth</module>
+		<module>eureka</module>
 	</modules>
 </project>
